@@ -1,4 +1,4 @@
-Б<?php
+<?php
 
 return [
     '~^hello/(.*)$~' => [\MyProject\Controllers\MainController::class, 'sayHello'],

@@ -5,23 +5,27 @@ spl_autoload_register(function (string $className) {
 });
 
 $route = $_GET['route'] ?? '';
+//$route = 'hello/';
+$routes = require '../src/routes.php';
 
-$pattern = '~^hello/(.*)$~';
-preg_match($pattern, $route, $matches);
+$isRouteFound = false;
+foreach ($routes as $pattern => $controllerAndAction) {
+    preg_match($pattern, $route, $matches);
+    if (!empty($matches)) {
+        $isRouteFound = true;
+        break;
+    }
+}
 
-if (!empty($matches)) {
-    $controller = new \MyProject\Controllers\MainController();
-    $controller->sayHello($matches[1]);
+if (!$isRouteFound) {
+    echo 'Страница не найдена!';
     return;
 }
 
-$pattern = '~^$~';
-preg_match($pattern, $route, $matches);
+unset($matches[0]);
 
-if (!empty($matches)) {
-    $controller = new \MyProject\Controllers\MainController();
-    $controller->main();
-    return;
-}
+$controllerName = $controllerAndAction[0];
+$actionName = $controllerAndAction[1];
 
-echo 'Страница не найдена';
+$controller = new $controllerName();
+$controller->$actionName(...$matches);

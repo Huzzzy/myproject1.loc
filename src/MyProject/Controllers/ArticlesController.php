@@ -29,7 +29,7 @@ class ArticlesController
         $title = 'Мой блог';
 
         if ($result === []) {
-            $this->view->renderHtml('errors/404.php', [], '404');
+            $this->view->renderHtml('errors/404.php', [], '404', 404);
             return;
         }
     

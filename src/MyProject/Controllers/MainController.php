@@ -23,15 +23,19 @@ class MainController
     {
         $title = '';
         $articles = $this->db->query('SELECT * FROM `articles`;');
+        $users = $this->db->query('SELECT * FROM `users`;');
         $this->view->renderHtml('main/main.php', ['articles' => $articles], $title);
     }
-    public function sayHello(string $name)
-    {
-        $title = 'Приветствие';
-        $this->view->renderHtml('main/hello.php', ['name' => $name], $title);
-    }
-    public function sayBye(string $name)
-    {
-        echo 'Пока, ' . $name;
-    }
+
+
+    
+    // public function sayHello(string $name)
+    // {
+    //     $title = 'Приветствие';
+    //     $this->view->renderHtml('main/hello.php', ['name' => $name], $title);
+    // }
+    // public function sayBye(string $name)
+    // {
+    //     echo 'Пока, ' . $name;
+    // }
 }

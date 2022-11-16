@@ -19,11 +19,13 @@ class MainController
             ['name' => 'Статья 1', 'text' => 'Текст статьи 1'],
             ['name' => 'Статья 2', 'text' => 'Текст статьи 2'],
         ];
-        $this->view->renderHtml('main/main.php', ['articles' => $articles]);
+        $title = '';
+        $this->view->renderHtml('main/main.php', ['articles' => $articles], $title);
     }
     public function sayHello(string $name)
     {
-        $this->view->renderHtml('main/hello.php', ['name' => $name]);
+        $title = 'Приветствие';
+        $this->view->renderHtml('main/hello.php', ['name' => $name], $title);
     }
     public function sayBye(string $name)
     {

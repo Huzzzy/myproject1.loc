@@ -23,7 +23,7 @@ class MainController
     }
     public function sayHello(string $name)
     {
-        echo 'Привет, ' . $name;
+        $this->view->renderHtml('main/hello.php', ['name' => $name]);
     }
     public function sayBye(string $name)
     {

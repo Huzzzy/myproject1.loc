@@ -5,7 +5,6 @@ spl_autoload_register(function (string $className) {
 });
 
 $route = $_GET['route'] ?? '';
-//$route = 'hello/';
 $routes = require '../src/routes.php';
 
 $isRouteFound = false;

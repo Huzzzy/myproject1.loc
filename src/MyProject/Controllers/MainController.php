@@ -6,7 +6,7 @@ class MainController
 {
     public function main()
     {
-        echo 'Главная страница';
+        require __DIR__ . '/../../../templates/main/main.php';
     }
     public function sayHello(string $name)
     {

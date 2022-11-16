@@ -19,8 +19,20 @@ class ArticlesController
         $this->db = new Db();
     }
 
-    public function view()
+    public function view(int $articleId)
     {
-        echo 'Здесь будет получение статьи и рендеринг шаблона';
+        $result = $this->db->query(
+            'SELECT * FROM `articles` WHERE id = :id;',
+            [':id' => $articleId]
+        );
+        
+        $title = 'Мой блог';
+
+        if ($result === []) {
+            // Здесь обрабатываем ошибку
+            return;
+        }
+    
+        $this->view->renderHtml('articles/view.php', ['article' => $result[0]], $title);
     }
 }

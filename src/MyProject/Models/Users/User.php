@@ -2,7 +2,9 @@
 
 namespace MyProject\Models\Users;
 
-class User
+use MyProject\Models\ActiveRecordEntity;
+
+class User extends ActiveRecordEntity
 {
     /** @var string */
     protected $nickname;
@@ -28,8 +30,13 @@ class User
     /**
      * @return string
      */
-    public function getEmail(): string
+    public function getNickname(): string
     {
-        return $this->email;
+        return $this->nickname;
+    }
+
+    protected static function getTableName(): string
+    {
+        return 'users';
     }
 }

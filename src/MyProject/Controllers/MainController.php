@@ -4,6 +4,7 @@ namespace MyProject\Controllers;
 
 use MyProject\View\View;
 use MyProject\Services\Db;
+use MyProject\Models\Articles\Article;
 
 class MainController
 {

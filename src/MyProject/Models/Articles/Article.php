@@ -6,29 +6,18 @@ use MyProject\Models\Users\User;
 
 class Article
 {
-    private $title;
+    /** @var int */
+    private $id;
+
+    /** @var string */
+    private $name;
+
+    /** @var string */
     private $text;
-    private $author;
 
-    public function __construct(string $title, string $text, User $author)
-    {
-        $this->title = $title;
-        $this->text = $text;
-        $this->author = $author;
-    }
+    /** @var int */
+    private $authorId;
 
-    public function getTitle(): string
-    {
-        return $this->title;
-    }
-
-    public function getText(): string
-    {
-        return $this->text;
-    }
-
-    public function getAuthor(): User
-    {
-        return $this->author;
-    }
+    /** @var string */
+    private $createdAt;
 }

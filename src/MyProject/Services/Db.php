@@ -7,8 +7,13 @@ class Db
     /** @var \PDO */
     private $pdo;
 
-    public function __construct()
+    private static $instancesCount = 0;
+    private static $instance;
+
+    private function __construct()
     {
+        self::$instancesCount++;
+
         $dbOptions = (require __DIR__ . '/../../settings.php')['db'];
 
         $this->pdo = new \PDO(
@@ -29,5 +34,14 @@ class Db
         }
 
         return $sth->fetchAll(\PDO::FETCH_CLASS, $className);
+    }
+
+    public static function getInstance(): self 
+    {
+        if (self::$instance === null) {
+            self::$instance = new self();
+        }
+
+        return self::$instance;
     }
 }

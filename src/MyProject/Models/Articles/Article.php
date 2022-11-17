@@ -38,4 +38,12 @@ class Article extends ActiveRecordEntity
     {
         return 'articles';
     }
+
+    /**
+     * @return int
+     */
+    public function getAuthorId(): int
+    {
+        return (int) $this->authorId;
+    }
 }

@@ -57,7 +57,12 @@ class Article
     public static function findAll(): array
     {
         $db = new Db();
-        return $db->query('SELECT * FROM `articles`;', [], Article::class);
+        return $db->query('SELECT * FROM `articles`;', [], static::class);
+    }
+
+    private static function getTableName(): string 
+    {
+        return 'articles';
     }
 
     private function underscoreToCamelCase(string $source): string

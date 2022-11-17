@@ -33,8 +33,7 @@ class ArticlesController
         $articleAuthor = User::getById($article->getAuthorId());
 
         $this->view->renderHtml('articles/view.php', [
-            'article' => $article,
-            'author' => $articleAuthor
+            'article' => $article
         ]);
     }
 }

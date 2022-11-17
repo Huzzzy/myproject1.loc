@@ -25,6 +25,11 @@ class ArticlesController
             'SELECT * FROM `articles` WHERE id = :id;',
             [':id' => $articleId]
         );
+        $resultUser = $this->db->query(
+            'SELECT `nickname` FROM `users` WHERE id = :id;',
+            [':id' => $result[0]['author_id']]
+        );
+
         
         $title = 'Мой блог';
 
@@ -32,7 +37,11 @@ class ArticlesController
             $this->view->renderHtml('errors/404.php', [], '404', 404);
             return;
         }
+
+        if ($resultUser === []) {
+            $resultUser[0]['nickname'] = 'не известно';
+        }
     
-        $this->view->renderHtml('articles/view.php', ['article' => $result[0]], $title);
+        $this->view->renderHtml('articles/view.php', ['article' => $result[0], 'nickname' => $resultUser[0]['nickname']], $title);
     }
 }

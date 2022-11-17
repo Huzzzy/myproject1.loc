@@ -23,7 +23,6 @@ class MainController
     {
         $title = '';
         $articles = $this->db->query('SELECT * FROM `articles`;');
-        $users = $this->db->query('SELECT * FROM `users`;');
         $this->view->renderHtml('main/main.php', ['articles' => $articles], $title);
     }
 

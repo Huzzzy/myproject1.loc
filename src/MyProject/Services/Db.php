@@ -7,13 +7,10 @@ class Db
     /** @var \PDO */
     private $pdo;
 
-    private static $instancesCount = 0;
     private static $instance;
 
     private function __construct()
     {
-        self::$instancesCount++;
-
         $dbOptions = (require __DIR__ . '/../../settings.php')['db'];
 
         $this->pdo = new \PDO(

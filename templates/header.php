@@ -2,7 +2,7 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <title><?= $article->getName() ?? 'Мой блог' ?></title>
+    <title><?='Мой блог' ?></title>
     <link rel="stylesheet" href="../styles.css">
     <link rel="stylesheet" href="styles.css">
 </head>

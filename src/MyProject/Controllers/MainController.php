@@ -22,9 +22,8 @@ class MainController
 
     public function main()
     {
-        $title = '';
         $articles = $this->db->query('SELECT * FROM `articles`;', [], Article::class);
-        $this->view->renderHtml('main/main.php', ['articles' => $articles], $title);
+        $this->view->renderHtml('main/main.php', ['articles' => $articles]);
     }
 
 

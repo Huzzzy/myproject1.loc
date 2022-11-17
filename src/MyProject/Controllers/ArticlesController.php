@@ -29,8 +29,6 @@ class ArticlesController
             $this->view->renderHtml('errors/404.php', [], 404);
             return;
         }
-        
-        $articleAuthor = User::getById($article->getAuthorId());
 
         $this->view->renderHtml('articles/view.php', [
             'article' => $article

@@ -26,6 +26,10 @@ class Article extends ActiveRecordEntity
     {
         return $this->name;
     }
+    public function setName ($name)
+    {
+        $this->name = $name;
+    }
 
     /**
      * @return string
@@ -33,6 +37,10 @@ class Article extends ActiveRecordEntity
     public function getText(): string
     {
         return $this->text;
+    }
+    public function setText($text)
+    {
+        $this->text = $text;
     }
 
     protected static function getTableName(): string

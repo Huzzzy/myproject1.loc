@@ -50,4 +50,13 @@ class ArticlesController
 
         $article->save();
     }
+    public function create():void
+    {
+        $article = new Article();
+        $article->setName('Новый статья');
+        $article->setText('Новый текст');
+        $article->setAuthorId('1');
+        $article->createdAt = date('d.m.Y H:i:s');
+        $article->save();
+    }
 }

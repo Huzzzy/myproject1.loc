@@ -50,13 +50,17 @@ class ArticlesController
 
         $article->save();
     }
-    public function create():void
+    public function add(): void
     {
+        $author = User::getById(1);
+
         $article = new Article();
-        $article->setName('Новый статья');
-        $article->setText('Новый текст');
-        $article->setAuthorId('1');
-        $article->createdAt = date('d.m.Y H:i:s');
+        $article->setAuthor($author);
+        $article->setName('Новое название статьи');
+        $article->setText('Новый текст статьи');
+
         $article->save();
+
+        var_dump($article);
     }
 }

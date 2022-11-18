@@ -27,6 +27,10 @@ abstract class ActiveRecordEntity
     {
         return lcfirst(str_replace('_', '', ucwords($source, '_')));
     }
+    private function camelCaseToUnderscore(string $source): string
+    {
+        return strtolower(preg_replace('/(?<!^)[A-Z]/', '_$0', $source));
+    }
 
     /**
      * @return static[]

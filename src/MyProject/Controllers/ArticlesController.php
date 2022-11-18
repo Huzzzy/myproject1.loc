@@ -48,6 +48,6 @@ class ArticlesController
         $article->setName('Новое название статьи');
         $article->setText('Новый текст статьи');
 
-        var_dump($article);
+        $article->save();
     }
 }

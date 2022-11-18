@@ -36,7 +36,7 @@ abstract class ActiveRecordEntity
     {
         $reflector = new \ReflectionObject($this);
         $properties = $reflector->getProperties();
-            
+
         $mappedProperties = [];
         foreach ($properties as $property) {
             $propertyName = $property->getName();
@@ -44,8 +44,39 @@ abstract class ActiveRecordEntity
             $mappedProperties[$propertyNameAsUnderscore] = $this->$propertyName;
         }
 
-    return $mappedProperties;
-}
+        return $mappedProperties;
+    }
+
+    public function save(): void
+    {
+        $mappedProperties = $this->mapPropertiesToDbFormat();
+        if ($this->id !== null) {
+          $this->update($mappedProperties);
+        } else {
+            $this->insert($mappedProperties);
+        }
+    }
+
+    private function update(array $mappedProperties): void
+    {
+        $columns2params = [];
+        $params2values = [];
+        $index = 1;
+        foreach ($mappedProperties as $column => $value) {
+            $param = ':param' . $index; // :param1
+            $columns2params[] = $column . ' = ' . $param; // column1 = :param1
+            $params2values[$param] = $value; // [:param1 => value1]
+            $index++;
+        }
+        $sql = 'UPDATE ' . static::getTableName() . ' SET ' . implode(', ', $columns2params) . ' WHERE id = ' . $this->id;
+        $db = Db::getInstance();
+        $db->query($sql, $params2values, static::class);
+    }
+
+    private function insert(array $mappedProperties): void
+    {
+        //здесь мы создаём новую запись в базе
+    }
 
     /**
      * @return static[]

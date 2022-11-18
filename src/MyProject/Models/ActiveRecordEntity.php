@@ -32,6 +32,21 @@ abstract class ActiveRecordEntity
         return strtolower(preg_replace('/(?<!^)[A-Z]/', '_$0', $source));
     }
 
+    private function mapPropertiesToDbFormat(): array
+    {
+        $reflector = new \ReflectionObject($this);
+        $properties = $reflector->getProperties();
+            
+        $mappedProperties = [];
+        foreach ($properties as $property) {
+            $propertyName = $property->getName();
+            $propertyNameAsUnderscore = $this->camelCaseToUnderscore($propertyName);
+            $mappedProperties[$propertyNameAsUnderscore] = $this->$propertyName;
+        }
+
+    return $mappedProperties;
+}
+
     /**
      * @return static[]
      */

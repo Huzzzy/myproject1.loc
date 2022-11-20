@@ -4,7 +4,7 @@
         <?php if (!empty($error)): ?>
             <div style="background-color: red;padding: 5px;margin: 15px"><?= $error ?></div>
         <?php endif; ?>
-        <form action="/projects/myproject1.loc/www/users/register" method="post">
+        <form action="/users/register" method="post">
             <label>Nickname <input type="text" name="nickname" value="<?= $_POST['nickname'] ?? '' ?>"></label>
             <br><br>
             <label>Email <input type="text" name="email" value="<?= $_POST['email'] ?? '' ?>"></label>

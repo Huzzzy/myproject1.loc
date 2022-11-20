@@ -3,7 +3,7 @@
         <td width="300px" class="sidebar">
             <div class="sidebarHeader">Меню</div>
             <ul>
-                <li><a href="/projects/myproject1.loc/www/">Главная страница</a></li>
+                <li><a href="/">Главная страница</a></li>
                 <li><a href="/about-me">Обо мне</a></li>
             </ul>
         </td>

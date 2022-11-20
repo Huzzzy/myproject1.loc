@@ -16,6 +16,6 @@ class UsersController
 
     public function signUp()
     {
-        echo 'здесь будет код для регистрации пользователей';
+        $this->view->renderHtml('users/signUp.php');
     }
 }

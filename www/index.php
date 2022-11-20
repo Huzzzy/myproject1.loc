@@ -30,5 +30,6 @@ try {
     $controller = new $controllerName();
     $controller->$actionName(...$matches);
 } catch (\MyProject\Exceptions\DbException $e) {
-    echo $e->getMessage();
+    $view = new \MyProject\View\View(__DIR__ . '/../templates/errors');
+    $view->renderHtml('500.php', ['error' => $e->getMessage()], 500);
 }

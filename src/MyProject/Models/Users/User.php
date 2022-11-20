@@ -39,4 +39,9 @@ class User extends ActiveRecordEntity
     {
         return 'users';
     }
+
+    public static function signUp(array $userData)
+    {
+        var_dump($userData);
+    }
 }

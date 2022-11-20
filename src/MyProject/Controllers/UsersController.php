@@ -27,6 +27,11 @@ class UsersController
             }
         }
 
+        if ($user instanceof User) {
+            $this->view->renderHtml('users/signUpSuccessful.php');
+            return;
+        }
+
         $this->view->renderHtml('users/signUp.php');
     }
 }

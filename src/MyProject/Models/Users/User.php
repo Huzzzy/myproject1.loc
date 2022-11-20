@@ -73,5 +73,18 @@ class User extends ActiveRecordEntity
         if (mb_strlen($userData['password']) < 8) {
             throw new InvalidArgumentException('Пароль должен быть не менее 8 символов');
         }
+
+
+        //После всех проверок создаем пользователя
+        $user = new User();
+        $user->nickname = $userData['nickname'];
+        $user->email = $userData['email'];
+        $user->passwordHash = password_hash($userData['password'], PASSWORD_DEFAULT);
+        $user->isConfirmed = false;
+        $user->role = 'user';
+        $user->authToken = sha1(random_bytes(100)) . sha1(random_bytes(100));
+        $user->save();
+
+        return $user;
     }
 }

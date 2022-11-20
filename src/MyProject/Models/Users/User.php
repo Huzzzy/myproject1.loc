@@ -3,6 +3,7 @@
 namespace MyProject\Models\Users;
 
 use MyProject\Models\ActiveRecordEntity;
+use MyProject\Exceptions\InvalidArgumentException;
 
 class User extends ActiveRecordEntity
 {
@@ -42,6 +43,16 @@ class User extends ActiveRecordEntity
 
     public static function signUp(array $userData)
     {
-        var_dump($userData);
+        if (empty($userData['nickname'])) {
+            throw new InvalidArgumentException('Не передан nickname');
+        }
+    
+        if (empty($userData['email'])) {
+            throw new InvalidArgumentException('Не передан email');
+        }
+    
+        if (empty($userData['password'])) {
+            throw new InvalidArgumentException('Не передан password');
+        }
     }
 }

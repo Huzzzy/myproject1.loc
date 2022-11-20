@@ -3,6 +3,7 @@
 namespace MyProject\Controllers;
 
 use MyProject\View\View;
+use MyProject\Models\Users\User;
 
 class UsersController
 {
@@ -16,6 +17,10 @@ class UsersController
 
     public function signUp()
     {
+        if (!empty($_POST)) {
+            $user = User::signUp($_POST);
+        }
+
         $this->view->renderHtml('users/signUp.php');
     }
 }

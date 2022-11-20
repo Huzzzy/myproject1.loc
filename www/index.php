@@ -18,8 +18,7 @@ try {
     }
 
     if (!$isRouteFound) {
-        echo 'Страница не найдена!';
-        return;
+        throw new \MyProject\Exceptions\NotFoundException();
     }
 
     unset($matches[0]);
@@ -32,4 +31,7 @@ try {
 } catch (\MyProject\Exceptions\DbException $e) {
     $view = new \MyProject\View\View(__DIR__ . '/../templates/errors');
     $view->renderHtml('500.php', ['error' => $e->getMessage()], 500);
+} catch (\MyProject\Exceptions\NotFoundException $e) {
+    $view = new \MyProject\View\View(__DIR__ . '/../templates/errors');
+    $view->renderHtml('404.php', ['error' => $e->getMessage()], 404);
 }

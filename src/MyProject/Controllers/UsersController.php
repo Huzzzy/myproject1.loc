@@ -7,6 +7,7 @@ use MyProject\Services\EmailSender;
 use MyProject\View\View;
 use MyProject\Models\Users\User;
 use MyProject\Exceptions\InvalidArgumentException;
+use MyProject\Exceptions\ActivateException;
 
 class UsersController
 {
@@ -37,7 +38,11 @@ class UsersController
                 'code' => $code
             ]);
 
-            $this->view->renderHtml('users/signUpSuccessful.php');
+            $this->view->renderHtml('mail/userActivation.php',
+                [
+                    'user' => $user->getId(),
+                    'code' => $code = UserActivationService::createActivationCode($user)
+                ]);
             return;
         }
         }
@@ -47,14 +52,31 @@ class UsersController
 
     public function activate(int $userId, string $activationCode):void
     {
-        $user = User::getById($userId);
-        $isCodeValid = UserActivationService::checkActivationCode($user, $activationCode);
+        try {
+            $user = User::getById($userId);
 
-        if ($isCodeValid) {
-            $user->activate();
-            UserActivationService::deleteActivationCode($userId);
-            echo 'OK!';
+            if ($user === null) {
+                throw new ActivateException('Нет такого пользователя!');
+            }
 
+            $isCodeValid = UserActivationService::checkActivationCode($user, $activationCode);
+
+
+
+            if ($user->isConfirmed()) {
+                throw new ActivateException('Пользователь уже активирован!');
+            }
+
+            if ($isCodeValid) {
+                $user->activate();
+                UserActivationService::deleteActivationCode($userId);
+                echo 'OK!';
+            } else {
+                throw new ActivateException('Код неправильный!');
+            }
+        } catch(ActivateException $e) {
+            $this->view->renderHtml('errors/noId.php', ['error' => $e->getMessage()]);
+            return;
         }
     }
 }

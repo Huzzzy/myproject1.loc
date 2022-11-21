@@ -25,9 +25,6 @@ class User extends ActiveRecordEntity
     /** @var string */
     protected $authToken;
 
-    /** @var string */
-    protected $createdAt;
-
     /**
      * @return string
      */
@@ -47,6 +44,11 @@ class User extends ActiveRecordEntity
     protected static function getTableName(): string
     {
         return 'users';
+    }
+
+    public function isConfirmed():bool
+    {
+        return $this->isConfirmed;
     }
 
     public static function signUp(array $userData)

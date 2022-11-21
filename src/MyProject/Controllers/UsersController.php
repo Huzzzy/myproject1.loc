@@ -44,4 +44,14 @@ class UsersController
 
         $this->view->renderHtml('users/signUp.php');
     }
+
+    public function activate(int $userId, string $activationCode)
+    {
+        $user = User::getById($userId);
+        $isCodeValid = UserActivationService::checkActivationCode($user, $activationCode);
+        if ($isCodeValid) {
+            $user->activate();
+            echo 'OK!';
+        }
+    }
 }

@@ -17,9 +17,9 @@
     <tr>
         <td colspan="2" style="text-align: right">
             <?php if(!empty($user)): ?>
-                Привет, <?= $user->getNickname() ?>  | <a href="http://myproject.loc/users/logout">Выйти</a>
+                Привет, <?= $user->getNickname() ?>  | <a href="http://myproject1.loc/users/logout">Выйти</a>
             <?php else: ?>
-                <a href="http://myproject.loc/users/login">Войти</a> | <a href="http://myproject.loc/users/register">Зарегестрироваться</a>
+                <a href="http://myproject1.loc/users/login">Войти</a> | <a href="http://myproject1.loc/users/register">Зарегестрироваться</a>
             <? endif; ?>
         </td>
     </tr>

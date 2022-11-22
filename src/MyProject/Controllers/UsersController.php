@@ -79,4 +79,9 @@ class UsersController
             return;
         }
     }
+
+    public function login()
+    {
+        $this->view->renderHtml('users/login.php');
+    }
 }

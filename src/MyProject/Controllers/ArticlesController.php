@@ -2,6 +2,7 @@
 
 namespace MyProject\Controllers;
 
+use MyProject\Exceptions\UnauthorizedException;
 use MyProject\Models\Articles\Article;
 use MyProject\Models\Users\User;
 use MyProject\Exceptions\NotFoundException;
@@ -39,6 +40,10 @@ class ArticlesController extends AbstractController
     }
     public function add(): void
     {
+        if ($this->user === null) {
+            throw new UnauthorizedException();
+        }
+
         $this->view->renderHtml('articles/add.php');
     }
     public function delete(int $articleId):void 

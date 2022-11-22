@@ -2,6 +2,7 @@
 
 namespace MyProject\Controllers;
 
+use MyProject\Exceptions\ForbiddenException;
 use MyProject\Exceptions\InvalidArgumentException;
 use MyProject\Exceptions\UnauthorizedException;
 use MyProject\Models\Articles\Article;
@@ -43,6 +44,9 @@ class ArticlesController extends AbstractController
     {
         if ($this->user === null) {
             throw new UnauthorizedException();
+        }
+        if ($this->user->getRole() !== 'admin') {
+            throw new ForbiddenException();
         }
 
         if (!empty($_POST)) {

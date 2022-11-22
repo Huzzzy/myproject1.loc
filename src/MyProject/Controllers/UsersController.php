@@ -86,4 +86,10 @@ class UsersController extends AbstractController
         }
         $this->view->renderHtml('users/login.php');
     }
+
+    public function logOut()
+    {
+        UsersAuthService::deleteToken();
+        header('Location: /');
+    }
 }

@@ -59,6 +59,14 @@ class User extends ActiveRecordEntity
         return $this->authToken;
     }
 
+    /**
+     * @return string
+     */
+    public function getRole(): string
+    {
+        return $this->role;
+    }
+
     public static function signUp(array $userData)
     {
         //NICKNAME

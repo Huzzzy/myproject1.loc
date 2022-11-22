@@ -63,7 +63,7 @@ class UsersController
 
 
 
-            if ($user->isConfirmed()) {
+            if ($user->getIsConfirmed()) {
                 throw new ActivateException('Пользователь уже активирован!');
             }
 

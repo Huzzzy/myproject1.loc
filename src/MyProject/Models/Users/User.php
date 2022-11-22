@@ -46,9 +46,17 @@ class User extends ActiveRecordEntity
         return 'users';
     }
 
-    public function isConfirmed():bool
+    public function getIsConfirmed():bool
     {
         return $this->isConfirmed;
+    }
+
+    /**
+     * @return string
+     */
+    public function getAuthToken(): string
+    {
+        return $this->authToken;
     }
 
     public static function signUp(array $userData)

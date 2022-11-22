@@ -3,6 +3,7 @@
 namespace MyProject\Controllers;
 
 use MyProject\Models\Users\UserActivationService;
+use MyProject\Models\Users\UsersAuthService;
 use MyProject\Services\EmailSender;
 use MyProject\View\View;
 use MyProject\Models\Users\User;
@@ -85,7 +86,9 @@ class UsersController
         if (!empty($_POST)) {
             try {
                 $user = User::login($_POST);
-            } catch (InvalidArgumentException $e) {
+                UsersAuthService::createToken($user);
+                header('Location: /');
+                exit();            } catch (InvalidArgumentException $e) {
                 $this->view->renderHtml('users/login.php', ['error' => $e->getMessage()]);
                 return;
             }

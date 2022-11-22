@@ -2,32 +2,14 @@
 
 namespace MyProject\Controllers;
 
-use MyProject\Models\Users\UsersAuthService;
-use MyProject\View\View;
-use MyProject\Services\Db;
+
 use MyProject\Models\Articles\Article;
 
-class MainController
+class MainController extends AbstractController
 {
-    /** @var View */
-    private $view;
-
-    /** @var Db */
-    private $db;
-
-    public function __construct()
-    {
-        $this->view = new View(__DIR__ . '/../../../templates');
-        $this->db = Db::getInstance();
-    }
-
     public function main()
     {
-        $articles = $this->db->query('SELECT * FROM `articles`;', [], Article::class);
-        $this->view->renderHtml('main/main.php', [
-            'articles' => $articles,
-            'user' => UsersAuthService::getUserByToken()
-        ]);
+        $articles = Article::findAll();
+        $this->view->renderHtml('main/main.php', ['articles' => $articles]);
     }
-
 }

@@ -6,6 +6,7 @@ use MyProject\Exceptions\ForbiddenException;
 use MyProject\Exceptions\InvalidArgumentException;
 use MyProject\Exceptions\UnauthorizedException;
 use MyProject\Models\Articles\Article;
+use MyProject\Models\Articles\ArticleComments;
 use MyProject\Models\Users\User;
 use MyProject\Exceptions\NotFoundException;
 
@@ -14,6 +15,8 @@ class ArticlesController extends AbstractController
     public function view(int $articleId)
     {
         $article = Article::getById($articleId);
+        $comment = ArticleComments::getById($articleId);
+        $comments = ArticleComments::findAll();
 
         if ($article === null) {
             $this->view->renderHtml('errors/404.php', [], 404);
@@ -21,7 +24,9 @@ class ArticlesController extends AbstractController
         }
 
         $this->view->renderHtml('articles/view.php', [
-            'article' => $article
+            'article' => $article,
+            'comment' => $comment,
+            'comments' => $comments
         ]);
     }
 
@@ -55,6 +60,7 @@ class ArticlesController extends AbstractController
 
         $this->view->renderHtml('articles/edit.php', ['article' => $article]);
     }
+
     public function add(): void
     {
         if ($this->user === null) {
@@ -78,7 +84,8 @@ class ArticlesController extends AbstractController
 
         $this->view->renderHtml('articles/add.php');
     }
-    public function delete(int $articleId):void 
+
+    public function delete(int $articleId): void
     {
         /** @var Article $article */
         $article = Article::getById($articleId);
@@ -90,5 +97,23 @@ class ArticlesController extends AbstractController
         $article->delete();
 
         header('Location: /');
+    }
+
+    public function commentsAdd(): void
+    {
+        if ($this->user === null) {
+            throw new UnauthorizedException();
+        }
+
+        if (!empty($_POST)) {
+            try {
+                $comment = ArticleComments::createFromArray($_POST, $this->user);
+            } catch (InvalidArgumentException $e) {
+                $this->view->renderHtml('articles/view.php', ['error' => $e->getMessage()]);
+                return;
+            }
+
+
+        }
     }
 }

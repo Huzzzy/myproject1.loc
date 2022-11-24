@@ -2,19 +2,30 @@
     <h1><?= $article->getName() ?></h1>
     <p><?= $article->getText() ?></p>
     <p>Автор: <?= $article->getAuthor()->getNickname() ?></p>
+
     <h1>Комментарии</h1>
-    <p><?= $comments->getAuthor?></p>
-    <p><?= $comments->getText() ?></p>
-    <?php if(!empty($user)){ ?>
-    <form action="/articles/<?= $article->getId()?>/comments" method="post">
-    <label for="text">Написать комментарий</label><br>
-    <textarea name="text" id="text" rows="4" cols="50"><?= $_POST['text'] ?? '' ?></textarea><br>
-    <br>
-    <input type="submit" value="Опубликовать">
+<?php foreach ($comments as $comment): ?>
+    <p><?= $comment->getAuthor()->getNickname() ?>
+    <?= $comment->getText() ?></p>
+<?php endforeach; ?>
+
+<?php if (!empty($error)): ?>
+    <div style="color: red;"><?= $error ?></div>
+<?php endif; ?>
+<?php if (!empty($user)) { ?>
+    <form action="/articles/<?= $article->getId() ?>/comments" method="post">
+        <label for="text">Написать комментарий</label><br>
+        <textarea name="text" id="text" rows="4" cols="50"><?= $_POST['text'] ?? '' ?></textarea><br>
+        <br>
+        <input type="submit" value="Опубликовать">
     </form>
-    <?php } ?>
-    <?php if(!empty($user) && $user->getRole() === 'admin'){ ?>
-    <a href="/articles/<?= $article->getId()?>/edit">Редактировать</a>
-    <a href="/articles/<?= $article->getId()?>/delete">Удалить</a>
-    <?php } ?>
+<?php } else { ?>
+    <div>Комментирование доступно только авторизированным пользователям</div>
+    <a href="http://myproject1.loc/users/login">Войти</a> | <a
+            href="http://myproject1.loc/users/register">Зарегестрироваться</a>
+<?php } ?>
+<?php if (!empty($user) && $user->getRole() === 'admin') { ?>
+    <a href="/articles/<?= $article->getId() ?>/edit">Редактировать</a>
+    <a href="/articles/<?= $article->getId() ?>/delete">Удалить</a>
+<?php } ?>
 <?php include __DIR__ . '/../footer.php'; ?>

@@ -35,12 +35,23 @@ class ArticleComments extends ActiveRecordEntity
         $this->articleId = $id->getId();
     }
 
+    public function getText(): string
+    {
+        return $this->text;
+    }
     public function setText($text):void
     {
         $this->text = $text->getId();
     }
 
-    public function setAuthor(User $author):void
+    public function getAuthor(): User
+    {
+        return User::getById($this->authorId);
+    }
+    /**
+     * @param User $author
+     */
+    public function setAuthor(User $author): void
     {
         $this->authorId = $author->getId();
     }

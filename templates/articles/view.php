@@ -21,8 +21,8 @@
     </form>
 <?php } else { ?>
     <div>Комментирование доступно только авторизированным пользователям</div>
-    <a href="http://myproject1.loc/users/login">Войти</a> | <a
-            href="http://myproject1.loc/users/register">Зарегестрироваться</a>
+    <a href="/users/login">Войти</a> | <a
+            href="/users/register">Зарегестрироваться</a>
 <?php } ?>
 <?php if (!empty($user) && $user->getRole() === 'admin') { ?>
     <a href="/articles/<?= $article->getId() ?>/edit">Редактировать</a>

@@ -3,6 +3,7 @@
     <p><?= $article->getText() ?></p>
     <p>Автор: <?= $article->getAuthor()->getNickname() ?></p>
     <h1>Комментарии</h1>
+    <p><?= $comments->getAuthor?></p>
     <p><?= $comments->getText() ?></p>
     <?php if(!empty($user)){ ?>
     <form action="/articles/<?= $article->getId()?>/comments" method="post">

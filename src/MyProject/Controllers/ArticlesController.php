@@ -88,6 +88,7 @@ class ArticlesController extends AbstractController
         }
 
         $article->delete();
-        var_dump($article);
+
+        header('Location: /');
     }
 }

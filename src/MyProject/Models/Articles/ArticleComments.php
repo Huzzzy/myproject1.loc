@@ -30,9 +30,9 @@ class ArticleComments extends ActiveRecordEntity
      * @return int
      */
 
-    public function setArticleId(Article $id):void
+    public function setArticleId($articleId):void
     {
-        $this->articleId = $id->getId();
+        $this->articleId = $articleId->getId();
     }
 
     public function getArticleId():string
@@ -46,7 +46,7 @@ class ArticleComments extends ActiveRecordEntity
     }
     public function setText($text):void
     {
-        $this->text = $text->getId();
+        $this->text = $text;
     }
 
     public function getAuthor(): User
@@ -56,12 +56,12 @@ class ArticleComments extends ActiveRecordEntity
     /**
      * @param User $author
      */
-    public function setAuthor(User $author): void
+    public function setAuthorId(User $author): void
     {
         $this->authorId = $author->getId();
     }
 
-    public static function createFromArray(array $fields, User $author):ArticleComments
+    public static function createFromArray(array $fields, User $author, Article $article):ArticleComments
     {
         if (empty($fields['text'])) {
             throw new InvalidArgumentException('Не передан текст комментария');
@@ -69,7 +69,8 @@ class ArticleComments extends ActiveRecordEntity
 
         $comment = new ArticleComments();
 
-        $comment->setAuthor($author);
+        $comment->setAuthorId($author);
+        $comment->setArticleId($article);
         $comment->setText($fields['text']);
 
         $comment->save();

@@ -5,7 +5,7 @@ return [
     '~^articles/(\d+)/edit$~' => [\MyProject\Controllers\ArticlesController::class, 'edit'],
     '~^articles/add$~' => [\MyProject\Controllers\ArticlesController::class, 'add'],
     '~^articles/(\d+)/comments$~' => [\MyProject\Controllers\ArticlesController::class, 'commentsAdd'],
-    '~^articles/(\d+)/comments/edit$~' => [\MyProject\Controllers\ArticlesController::class, 'commentsEdit'],
+    '~^articles/(\d+)/comments/(\d+)/edit$~' => [\MyProject\Controllers\ArticlesController::class, 'commentsEdit'],
     '~^articles/(\d+)/delete$~' => [\MyProject\Controllers\ArticlesController::class, 'delete'],
     '~^users/register$~' => [\MyProject\Controllers\UsersController::class, 'signUp'],
     '~^users/(\d+)/activate/(.+)$~' => [\MyProject\Controllers\UsersController::class, 'activate'],

@@ -99,21 +99,32 @@ class ArticlesController extends AbstractController
         header('Location: /');
     }
 
-    public function commentsAdd(): void
+    public function commentsAdd(int $articleId): void
     {
+        $article = Article::getById($articleId);
+        $comment = ArticleComments::getById($articleId);
+        $comments = ArticleComments::findAll();
+
         if ($this->user === null) {
             throw new UnauthorizedException();
         }
 
         if (!empty($_POST)) {
             try {
-                $comment = ArticleComments::createFromArray($_POST, $this->user);
+                $comment = ArticleComments::createFromArray($_POST, $this->user, $article);
             } catch (InvalidArgumentException $e) {
-                $this->view->renderHtml('articles/view.php', ['error' => $e->getMessage()]);
+                $this->view->renderHtml('articles/view.php', ['error' => $e->getMessage(),
+                    'article' => $article,
+                    'comment' => $comment,
+                    'comments' => $comments
+                ]);
                 return;
             }
 
-
+            header('Location: /articles/' . $article->getId(), true, 302);
+            exit();
         }
+
+
     }
 }

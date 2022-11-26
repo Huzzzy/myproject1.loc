@@ -6,7 +6,7 @@
     <h1>Комментарии</h1>
 
 <?php foreach ($comments as $comment): ?>
-    <?php if ($article->getId() == $comment->getArticleId()) { ?>
+    <?php if ($article->getId() === $comment->getArticleId()) { ?>
         <p><?= $comment->getAuthor()->getNickname() ?>:
             <?= $comment->getText() ?></p>
     <?php } else { continue; ?>

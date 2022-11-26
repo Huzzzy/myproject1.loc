@@ -4,10 +4,17 @@
     <p>Автор: <?= $article->getAuthor()->getNickname() ?></p>
 
     <h1>Комментарии</h1>
+
 <?php foreach ($comments as $comment): ?>
-    <p><?= $comment->getAuthor()->getNickname() ?>
-    <?= $comment->getText() ?></p>
+    <?php if ($article->getId() == $comment->getArticleId()) { ?>
+        <p><?= $comment->getAuthor()->getNickname() ?>
+            <?= $comment->getText() ?></p>
+    <?php } else { ?>
+        <p>Комментарии отсутствуют</p>
+        <?php break; ?>
+    <?php } ?>
 <?php endforeach; ?>
+
 
 <?php if (!empty($error)): ?>
     <div style="color: red;"><?= $error ?></div>

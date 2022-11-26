@@ -35,6 +35,11 @@ class ArticleComments extends ActiveRecordEntity
         $this->articleId = $id->getId();
     }
 
+    public function getArticleId():string
+    {
+        return $this->articleId;
+    }
+
     public function getText(): string
     {
         return $this->text;

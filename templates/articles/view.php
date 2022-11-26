@@ -12,9 +12,15 @@
             <?= $comment->getText() ?></p>
         <?php if (!empty($user)) { ?>
             <?php if ($user->getRole() === 'admin' || $user->getId() === $comment->getAuthorId()) { ?>
-                <a href="/articles/<?= $article->getId() ?>/comments/edit">Редактировать</a>
+                <form action="/articles/<?= $article->getId() ?>/comments/<?= $comment->getId() ?>/edit" method="post">
+                    <label for="text">Редактировать комментарий</label><br>
+                    <textarea name="text" id="text" rows="2" cols="50"><?= $_POST['text'] ?? '' ?></textarea><br>
+                    <br>
+                    <input type="submit" value="Редактировать">
+                </form>
             <?php } ?>
         <?php } ?>
+
     <?php } else {
         continue; ?>
         <p>Комментарии отсутствуют</p>

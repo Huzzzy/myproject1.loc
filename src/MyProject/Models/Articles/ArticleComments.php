@@ -53,6 +53,11 @@ class ArticleComments extends ActiveRecordEntity
     {
         return User::getById($this->authorId);
     }
+
+    public function getAuthorId(): int
+    {
+        return $this->authorId;
+    }
     /**
      * @param User $author
      */

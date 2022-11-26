@@ -7,11 +7,10 @@
 
 <?php foreach ($comments as $comment): ?>
     <?php if ($article->getId() == $comment->getArticleId()) { ?>
-        <p><?= $comment->getAuthor()->getNickname() ?>
+        <p><?= $comment->getAuthor()->getNickname() ?>:
             <?= $comment->getText() ?></p>
-    <?php } else { ?>
+    <?php } else { continue; ?>
         <p>Комментарии отсутствуют</p>
-        <?php break; ?>
     <?php } ?>
 <?php endforeach; ?>
 

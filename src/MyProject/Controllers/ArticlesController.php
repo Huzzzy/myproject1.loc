@@ -126,10 +126,10 @@ class ArticlesController extends AbstractController
         }
 
     }
-        public function commentsEdit(int $articleId)
+        public function commentsEdit(int $articleId, int $commentId)
         {
             $article = Article::getById($articleId);
-            $comment = ArticleComments::getById($articleId);
+            $comment = ArticleComments::getById($commentId);
             $comments = ArticleComments::findAll();
 
 
@@ -137,9 +137,9 @@ class ArticlesController extends AbstractController
                 throw new UnauthorizedException();
             }
 
-//            if ($this->user->getRole() !== 'admin' || $this->user->getId() !== $comment->getAuthorId()) {
-//                throw new ForbiddenException();
-//            }
+            if ($this->user->getRole() !== 'admin' || $this->user->getId() !== $comment->getAuthorId()) {
+                throw new ForbiddenException();
+            }
 
             if (!empty($_POST)) {
                 try {
@@ -153,7 +153,7 @@ class ArticlesController extends AbstractController
                     return;
                 }
 
-                header('Location: /articles/' . $article->getId() . '#comment' . $comment->getId(), true, 302);
+                header('Location: /articles/' . $article->getId(), true, 302);
                 exit();
             }
         }

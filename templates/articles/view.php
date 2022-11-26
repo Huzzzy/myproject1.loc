@@ -5,15 +5,21 @@
 
     <h1>Комментарии</h1>
 
+
 <?php foreach ($comments as $comment): ?>
     <?php if ($article->getId() === $comment->getArticleId()) { ?>
         <p><?= $comment->getAuthor()->getNickname() ?>:
             <?= $comment->getText() ?></p>
-    <?php } else { continue; ?>
+        <?php if (!empty($user)) { ?>
+            <?php if ($user->getRole() === 'admin' || $user->getId() === $comment->getAuthorId()) { ?>
+                <a href="/articles/<?= $article->getId() ?>/comments/edit">Редактировать</a>
+            <?php } ?>
+        <?php } ?>
+    <?php } else {
+        continue; ?>
         <p>Комментарии отсутствуют</p>
     <?php } ?>
 <?php endforeach; ?>
-
 
 <?php if (!empty($error)): ?>
     <div style="color: red;"><?= $error ?></div>

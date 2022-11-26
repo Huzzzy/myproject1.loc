@@ -78,4 +78,17 @@ class ArticleComments extends ActiveRecordEntity
         return $comment;
     }
 
+    public function updateFromArray(array $fields): ArticleComments
+    {
+        if (empty($fields['text'])) {
+            throw new InvalidArgumentException('Не передан текст комментария');
+        }
+
+        $this->setText($fields['text']);
+
+        $this->save();
+
+        return $this;
+    }
+
 }

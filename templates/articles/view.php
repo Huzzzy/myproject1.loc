@@ -8,7 +8,7 @@
 
 <?php foreach ($comments as $comment): ?>
     <?php if ($article->getId() === $comment->getArticleId()) { ?>
-        <p><?= $comment->getAuthor()->getNickname() ?>:
+        <p id="comment<?php $comment->getId() ?>"><?= $comment->getAuthor()->getNickname() ?>:
             <?= $comment->getText() ?></p>
         <?php if (!empty($user)) { ?>
             <?php if ($user->getRole() === 'admin' || $user->getId() === $comment->getAuthorId()) { ?>

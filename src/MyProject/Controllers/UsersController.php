@@ -74,6 +74,10 @@ class UsersController extends AbstractController
 
     public function login()
     {
+        if (!empty($_COOKIE)) {
+            header('Location: /');
+            exit;
+        }
         if (!empty($_POST)) {
             try {
                 $user = User::login($_POST);

@@ -126,36 +126,39 @@ class ArticlesController extends AbstractController
         }
 
     }
-        public function commentsEdit(int $articleId, int $commentId)
-        {
-            $article = Article::getById($articleId);
-            $comment = ArticleComments::getById($commentId);
-            $comments = ArticleComments::findAll();
+
+    public function commentsEdit(int $articleId, int $commentId)
+    {
+        $article = Article::getById($articleId);
+        $comment = ArticleComments::getById($commentId);
+        $comments = ArticleComments::findAll();
 
 
-            if ($this->user === null) {
-                throw new UnauthorizedException();
-            }
+        if ($this->user === null) {
+            throw new UnauthorizedException();
+        }
 
-            if ($this->user->getRole() !== 'admin' || $this->user->getId() !== $comment->getAuthorId()) {
+        if ($this->user->getRole() !== 'admin') {
+            if ($this->user->getId() !== $comment->getAuthorId()) {
                 throw new ForbiddenException();
             }
-
-            if (!empty($_POST)) {
-                try {
-                    $comment->updateFromArray($_POST);
-                } catch (InvalidArgumentException $e) {
-                    $this->view->renderHtml('articles/view.php', ['error' => $e->getMessage(),
-                        'article' => $article,
-                        'comment' => $comment,
-                        'comments' => $comments
-                    ]);
-                    return;
-                }
-
-                header('Location: /articles/' . $article->getId(), true, 302);
-                exit();
-            }
         }
+
+        if (!empty($_POST)) {
+            try {
+                $comment->updateFromArray($_POST);
+            } catch (InvalidArgumentException $e) {
+                $this->view->renderHtml('articles/view.php', ['error' => $e->getMessage(),
+                    'article' => $article,
+                    'comment' => $comment,
+                    'comments' => $comments
+                ]);
+                return;
+            }
+
+            header('Location: /articles/' . $article->getId(), true, 302);
+            exit();
+        }
+    }
 
 }

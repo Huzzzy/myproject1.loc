@@ -163,6 +163,7 @@ class ArticlesController extends AbstractController
     public function commentsDelete(int $articleId, int $commentId):void
     {
         $comment = ArticleComments::getById($commentId);
+        $article = Article::getById($articleId);
 
         if ($comment === null) {
             throw new NotFoundException();
@@ -170,6 +171,7 @@ class ArticlesController extends AbstractController
 
         $comment->delete();
 
-        header('Location: /');
+        header('Location: /articles/' . $article->getId(), true, 302);
+        exit();
     }
 }

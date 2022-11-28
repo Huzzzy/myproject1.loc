@@ -159,4 +159,16 @@ abstract class ActiveRecordEntity
         }
         return $result[0];
     }
+
+    public static function findTheLastThreeColumns(): array
+    {
+        $db = Db::getInstance();
+        $result = $db->query('SELECT * FROM `' . static::getTableName() .
+            '`ORDER BY `id` DESC LIMIT 3;',
+            [],
+            static::class
+        );
+
+        return $result;
+    }
 }

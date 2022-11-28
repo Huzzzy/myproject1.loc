@@ -150,7 +150,6 @@ class ArticlesController extends AbstractController
             } catch (InvalidArgumentException $e) {
                 $this->view->renderHtml('articles/view.php', ['error' => $e->getMessage(),
                     'article' => $article,
-                    'comment' => $comment,
                     'comments' => $comments
                 ]);
                 return;

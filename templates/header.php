@@ -11,7 +11,11 @@
     <tr>
         <td colspan="2" class="header">
             Мой блог
+            <?php if (!empty($user) && $user->getRole() === 'admin'){ ?>
+            <a href="http://myproject1.loc/admin">Страница администратора</a>
+            <?php } ?>
         </td>
+
     </tr>
     <tr>
         <td colspan="2">

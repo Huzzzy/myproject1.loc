@@ -39,6 +39,11 @@ class Article extends ActiveRecordEntity
     {
         return $this->text;
     }
+
+    public function getShortText(): string
+    {
+        return mb_strimwidth($this->text, 0, 100, "...");
+    }
     public function setText($text)
     {
         $this->text = $text;

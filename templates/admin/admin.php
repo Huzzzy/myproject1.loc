@@ -14,9 +14,9 @@
     <form action="/articles/<?= $article->getId() ?>/comments/<?= $comment->getId() ?>/edit" method="post">
         <label for="text">Редактировать комментарий</label><br>
         <textarea name="text" id="text" rows="2" cols="50"><?= $_POST['text'] ?? '' ?></textarea><br>
-
         <input type="submit" value="Редактировать">
     </form>
+    <a href="/articles/<?= $article->getId() ?>/comments/<?= $comment->getId() ?>/delete">Удалить</a>
     <hr>
 <?php } ?>
 <?php include __DIR__ . '/../footer.php'; ?>

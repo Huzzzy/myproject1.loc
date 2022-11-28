@@ -14,13 +14,13 @@
             <?php if ($user->getRole() === 'admin' || $user->getId() === $comment->getAuthorId()) { ?>
                 <form action="/articles/<?= $article->getId() ?>/comments/<?= $comment->getId() ?>/edit" method="post">
                     <label for="text">Редактировать комментарий</label><br>
-                    <textarea name="text" id="text" rows="2" cols="50"><?= $_POST['text'] ?? '' ?></textarea><br>
-                    <br>
+                    <textarea name="text" id="text" rows="2" cols="50"><?= $_POST['text'] ?? '' ?></textarea>
                     <input type="submit" value="Редактировать">
                 </form>
+                <a href="/articles/<?= $article->getId() ?>/comments/<?= $comment->getId() ?>/delete">Удалить</a>
             <?php } ?>
         <?php } ?>
-
+        <hr>
     <?php } else {
         continue; ?>
         <p>Комментарии отсутствуют</p>

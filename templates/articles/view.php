@@ -1,6 +1,6 @@
 <?php include __DIR__ . '/../header.php'; ?>
     <h1><?= $article->getName() ?></h1>
-    <p><?= $article->getText() ?></p>
+    <p><?= $article->getParsedText() ?></p>
     <p>Автор: <?= $article->getAuthor()->getNickname() ?></p>
 
     <h1>Комментарии</h1>

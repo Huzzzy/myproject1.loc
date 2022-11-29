@@ -1,4 +1,5 @@
 <?php
+require __DIR__ . '/../vendor/autoload.php';
 
 try {
     spl_autoload_register(function (string $className) {

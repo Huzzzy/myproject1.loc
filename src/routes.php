@@ -12,6 +12,7 @@ return [
     '~^users/(\d+)/activate/(.+)$~' => [\MyProject\Controllers\UsersController::class, 'activate'],
     '~^users/login$~' => [\MyProject\Controllers\UsersController::class, 'login'],
     '~^users/logout$~' => [\MyProject\Controllers\UsersController::class, 'logOut'],
+    '~^users/profile$~' => [\MyProject\Controllers\ProfileController::class, 'profile'],
     '~^admin$~' => [\MyProject\Controllers\AdminController::class, 'admin'],
     '~^$~' => [\MyProject\Controllers\MainController::class, 'main']
 ];

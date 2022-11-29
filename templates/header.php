@@ -18,7 +18,7 @@
 
     </tr>
     <tr>
-        <td colspan="2">
+        <td colspan="1">
             <?php if (!empty($user) && $user->getRole() === 'admin'): ?>
                 <a href="http://myproject1.loc/articles/add">Добавить статью</a>
             <? endif; ?>
@@ -30,6 +30,11 @@
                             href="http://myproject1.loc/users/register">Зарегестрироваться</a>
                 <? endif; ?>
             </div>
+        </td>
+        <td colspan="1">
+            <?php if(!empty($user)) { ?>
+                <a href="http://myproject1.loc/users/profile">Мой профиль</a>
+            <?php } ?>
         </td>
     </tr>
     <tr>

@@ -9,7 +9,8 @@ use MyProject\Models\Articles\Article;
 use MyProject\Models\Articles\ArticleComments;
 
 
-class AdminController extends AbstractController {
+class AdminController extends AbstractController
+{
     public function admin()
     {
         if ($this->user === null) {

@@ -23,10 +23,7 @@ class ArticlesApiController extends AbstractController
 
     public function add()
     {
-        $input = json_decode(
-            file_get_contents('php://input'),
-            true
-        );
+        $input = $this->getInputData();
         var_dump($input);
     }
 }

@@ -20,4 +20,13 @@ class ArticlesApiController extends AbstractController
             'articles' => [$article]
         ]);
     }
+
+    public function add()
+    {
+        $input = json_decode(
+            file_get_contents('php://input'),
+            true
+        );
+        var_dump($input);
+    }
 }

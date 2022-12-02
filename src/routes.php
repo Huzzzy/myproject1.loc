@@ -14,5 +14,6 @@ return [
     '~^users/logout$~' => [\MyProject\Controllers\UsersController::class, 'logOut'],
     '~^users/profile$~' => [\MyProject\Controllers\ProfileController::class, 'profile'],
     '~^admin$~' => [\MyProject\Controllers\AdminController::class, 'admin'],
+    '~^(\d+)$~' => [\MyProject\Controllers\MainController::class, 'page'],
     '~^$~' => [\MyProject\Controllers\MainController::class, 'main']
 ];

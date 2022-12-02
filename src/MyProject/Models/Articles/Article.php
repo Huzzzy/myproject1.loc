@@ -5,6 +5,7 @@ namespace MyProject\Models\Articles;
 use MyProject\Exceptions\InvalidArgumentException;
 use MyProject\Models\ActiveRecordEntity;
 use MyProject\Models\Users\User;
+use MyProject\Services\Db;
 
 class Article extends ActiveRecordEntity
 {
@@ -160,5 +161,13 @@ class Article extends ActiveRecordEntity
         $sql = 'SELECT id FROM '.self::getTableName().' WHERE id > :id LIMIT 1;';
         $result = $db->query($sql, ['id' => $pageFirstId]);
         return !empty($result);
+    }
+
+    public static function getLastID(): ?int
+    {
+        $db = Db::getInstance();
+        $sql = 'SELECT id FROM '.self::getTableName().' ORDER BY id DESC LIMIT 1;';
+        $result = $db->query($sql);
+        return !empty($result) ? $result[0]->id : null;
     }
 }

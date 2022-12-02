@@ -37,8 +37,21 @@ class MainController extends AbstractController
 
         $this->view->renderHtml('main/main.php', [
             'articles' => $articles,
-            'previousPageLink' => Article::hasPreviousPage($firstID) ? '/before/' . $firstID : null,
-            'nextPageLink' => Article::hasNextPage($lastID) ? '/after/' . $lastID : null,
+            'previousPageLink' => $firstID < $this->getLastArticleID() ? '/before/' . $firstID : null,
+            'nextPageLink' => $lastID > 1 ? '/after/' . $lastID : null,
         ]);
+    }
+
+    private function getLastArticleID(): int
+    {
+        $cacheFile = __DIR__ . '/../../../cache/last_article_id';
+        $value_from_cache = file_get_contents($cacheFile);
+        if (!empty($value_from_cache)) {
+            return (int)$value_from_cache;
+        }
+
+        $lastID = Article::getLastID();
+        file_put_contents($cacheFile, $lastID);
+        return $lastID;
     }
 }

@@ -17,6 +17,7 @@ class MainController extends AbstractController
         $this->view->renderHtml('main/main.php', [
             'articles' => Article::getPage($pageNum, 5),
             'pagesCount' => Article::getPagesCount(5),
+            'currentPageNum' => $pageNum,
         ]);
     }
 }

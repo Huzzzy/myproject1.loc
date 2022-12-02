@@ -7,7 +7,11 @@
 
     <div style="text-align: center">
         <?php for ($pageNum = 1; $pageNum <= $pagesCount; $pageNum++): ?>
-            <a href="/<?= $pageNum === 1 ? '' : $pageNum ?>"><?= $pageNum ?></a>
+            <?php if ($currentPageNum === $pageNum): ?>
+                <b><?= $pageNum ?></b>
+            <?php else: ?>
+                <a href="/<?= $pageNum === 1 ? '' : $pageNum ?>"><?= $pageNum ?></a>
+            <?php endif; ?>
         <?php endfor; ?>
     </div>
 <?php include __DIR__ . '/../footer.php'; ?>

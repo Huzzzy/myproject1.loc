@@ -145,4 +145,20 @@ class Article extends ActiveRecordEntity
         $sql = sprintf('SELECT * FROM '.self::getTableName().' WHERE id < :id ORDER BY id DESC LIMIT %d;', $limit);
         return $db->query($sql, ['id' => $id], self::class);
     }
+
+    public static function hasNextPage(int $pageLastId): bool
+    {
+        $db = Db::getInstance();
+        $sql = 'SELECT id FROM '.self::getTableName().' WHERE id < :id LIMIT 1;';
+        $result = $db->query($sql, ['id' => $pageLastId]);
+        return !empty($result);
+    }
+
+    public static function hasPreviousPage(int $pageFirstId): bool
+    {
+        $db = Db::getInstance();
+        $sql = 'SELECT id FROM '.self::getTableName().' WHERE id > :id LIMIT 1;';
+        $result = $db->query($sql, ['id' => $pageFirstId]);
+        return !empty($result);
+    }
 }

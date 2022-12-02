@@ -125,4 +125,24 @@ class Article extends ActiveRecordEntity
 
         return $this;
     }
+
+    /**
+     * @return Article[]
+     */
+    public static function getPageBefore(int $id, int $limit): array
+    {
+        $db = Db::getInstance();
+        $sql = sprintf('SELECT * FROM (SELECT * FROM '.self::getTableName().' WHERE id > :id ORDER BY id ASC LIMIT %d) as articles ORDER BY id DESC;', $limit);
+        return $db->query($sql, ['id' => $id], self::class);
+    }
+
+    /**
+     * @return Article[]
+     */
+    public static function getPageAfter(int $id, int $limit): array
+    {
+        $db = Db::getInstance();
+        $sql = sprintf('SELECT * FROM '.self::getTableName().' WHERE id < :id ORDER BY id DESC LIMIT %d;', $limit);
+        return $db->query($sql, ['id' => $id], self::class);
+    }
 }

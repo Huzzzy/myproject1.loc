@@ -25,4 +25,14 @@ class MainController extends AbstractController
                 : null
         ]);
     }
+
+    public function before(int $id)
+    {
+
+    }
+
+    public function after(int $id)
+    {
+
+    }
 }

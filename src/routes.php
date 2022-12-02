@@ -15,5 +15,7 @@ return [
     '~^users/profile$~' => [\MyProject\Controllers\ProfileController::class, 'profile'],
     '~^admin$~' => [\MyProject\Controllers\AdminController::class, 'admin'],
     '~^(\d+)$~' => [\MyProject\Controllers\MainController::class, 'page'],
+    '~^before/(\d+)$~' => [\MyProject\Controllers\MainController::class, 'before'],
+    '~^after/(\d+)$~' => [\MyProject\Controllers\MainController::class, 'after'],
     '~^$~' => [\MyProject\Controllers\MainController::class, 'main']
 ];
